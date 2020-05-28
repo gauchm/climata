@@ -52,7 +52,8 @@ class WaterMlParser(BaseParser):
         data = [{
             'date': date,
             'value': value,
-        } for date, value in values.get_date_values()]
+            'qualifiers': raw_values.qualifiers if hasattr(raw_values, 'qualifiers') else None
+        } for (date, value), raw_values in zip(values.get_date_values(), values.values)]
 
         return {
             'site_name': site.site_name,
